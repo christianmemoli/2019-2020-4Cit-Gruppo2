@@ -12,13 +12,13 @@ public class File {
 		this.mode = 'R';
 		if (mode == 'W' || mode == 'w') {
 			this.mode = 'W';
-			writer = new BufferedWriter(new FileWriter(filename));
+			writer = new BufferedWriter(new FileWriter(filename, true));
 		}
 		else {
 			reader = new BufferedReader(new FileReader(filename));
 		}
 	}
-	public void toFile (String line) throws FileException,IOException {
+	public void toFile (String line) throws FileException,IOException {  
 		if (this.mode == 'R') throw new FileException("Read-only"+"file!");	
 		writer.write(line);
 		writer.newLine();
