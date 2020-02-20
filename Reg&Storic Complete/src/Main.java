@@ -17,10 +17,14 @@ public class Main {
 				Utente p=new Utente();
 				String Password2= new String();
 				System.out.println("############################################");
+				System.out.println("(Premere 0 per ritornare al menù precedente)");
 				System.out.println("REGISTRAZIONE");
 				System.out.println("############################################");
 				System.out.println("Inserire il nome: ");
 				p.setName(input.nextLine());
+				if(p.getName().equals("0")) {
+					break;
+				}
 				System.out.println("Inserire il cognome: ");
 				p.setSurname(input.nextLine());
 				do {
@@ -56,10 +60,12 @@ public class Main {
 				String pass;
 				x.nextLine();
 				System.out.println("############################################");
+				System.out.println("(Premere 0 per ritornare al menù precedente)");
 				System.out.println("Log in:");
 				System.out.println("############################################");
 				System.out.println("Inserisci l'email: ");
 				user=x.nextLine();
+				if(user.equals("0")) break;
 				System.out.println("Inserisci la password: ");
 				pass=x.nextLine();
 				if(user.equals(email) && pass.equals(pass2))
