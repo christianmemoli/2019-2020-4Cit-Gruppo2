@@ -24,7 +24,7 @@ public class ListaOrdini {
 		vet[i]=l;
 	}
 	public String vedi(){
-		String ap = " ";
+		String ap=new String();
 		for (int i=0; i<n; i++) {
 			try{
 				ap = ap + "Ordine: " + vet[i].getID() + ", Data: " + vet[i].getData() + ", Stato: " + vet[i].getStato() + ", Prezzo: " + vet[i].getPrezzo() + '\n';
@@ -46,7 +46,6 @@ public class ListaOrdini {
 						det.fromFile();
 						det.fromFile();
 						pr[j] = pr[j] + Float.parseFloat(det.fromFile());
-						System.out.println(pr[j]);
 						j++;
 					}
 				}
