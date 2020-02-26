@@ -34,54 +34,54 @@ public class ListaOrdini {
 		}
 		return ap;
 	}
-	public void vediOrd() throws IOException{
-		float[] pr = new float[n];
+	public double calcPrezzoOrd() throws IOException {
+		String str = new String();
+		double a = 0;
 		for(int i=0; i<n; i++) {
 			try {
 				File det = new File("dettordine"+i+".txt",'R');
-				try {
-					int j = 0;
+				if(det.exists()) {
 					while(true) {
-						det.fromFile();
-						det.fromFile();
-						det.fromFile();
-						pr[j] = pr[j] + Float.parseFloat(det.fromFile());
-						j++;
+						str = det.fromFile();
+						String[] app = str.split(";",5);
+						a = a + Double.parseDouble(app[3]);
 					}
 				}
-				catch(FileException exception) {
-					System.out.println(exception.getMess());
+				else {
+					return 0;
 				}
-			catch(java.lang.NumberFormatException exception) {
 			}
-				File o = new File("ordini.txt",'R');
-				try {
-					int j = 0;
-					while(true) {
-						Ordine ord = new Ordine();
-						ord.setID(Integer.parseInt(o.fromFile()));
-						ord.setData(o.fromFile());
-						ord.setStato(o.fromFile());
-						ord.setPrezzo(pr[j]);
-						o.fromFile();
-						setOrdine(ord, j);
-						o.fromFile();
-						j++;
-					}
-				}
-				catch(FileException exception) {
-					System.out.println(exception.getMess());
-				}
-				det.close();
-				o.close();
-			}
-			catch(java.lang.NullPointerException | java.io.FileNotFoundException exception) {
-				return;
+			catch(FileException exception) {
+				System.out.println(exception.getMess());
 			}
 		}
+		return a;
+	}
+	public void vediOrd() throws IOException{
+		String str = new String();
+		File o = new File("ordini.txt",'R');
+		int j = 0;
+		try {
+			while(true) {
+				Ordine ord = new Ordine();
+				str = o.fromFile();
+				String[] app = str.split(";",3);
+				ord.setID(Integer.parseInt(app[0]));
+				ord.setData(app[1]);
+				ord.setStato(app[2]);
+				ord.setPrezzo(calcPrezzoOrd());
+				setOrdine(ord, j);
+				j++;
+			}
+		}
+		catch(FileException exception) {
+			System.out.println(exception.getMess());
+		}
+		o.close();
 	}
 	public void vedidett() throws IOException{
 		int s;
+		String str = new String();
 		DettaglioOrdine d = new DettaglioOrdine();
 		System.out.println("Visualizzare nel dettaglio quale ordine?");
 		s = input.nextInt();
@@ -94,11 +94,13 @@ public class ListaOrdini {
 					try {
 						while(true) {
 							Prodotto p = new Prodotto();
-							p.setID(Integer.parseInt(dett.fromFile()));
-							p.setNome(dett.fromFile());
-							p.setPeso(Double.parseDouble(dett.fromFile()));
-							p.setPrezzo(Float.parseFloat(dett.fromFile()));
-							p.setQuantita(Integer.parseInt(dett.fromFile()));
+							str = dett.fromFile();
+							String[] app = str.split(";",5);
+							p.setID(Integer.parseInt(app[0]));
+							p.setNome(app[1]);
+							p.setPeso(Double.parseDouble(app[2]));
+							p.setPrezzo(Float.parseFloat(app[3]));
+							p.setQuantita(Integer.parseInt(app[4]));
 							d.setProdotto(p, j);
 							dett.fromFile();
 							j++;
@@ -107,7 +109,6 @@ public class ListaOrdini {
 					catch(FileException exception) {
 						System.out.println(exception.getMess());
 					}
-					dett.close();
 					System.out.println(d.vedi());
 				}
 			}

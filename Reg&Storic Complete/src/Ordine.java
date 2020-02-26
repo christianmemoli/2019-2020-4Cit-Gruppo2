@@ -2,7 +2,7 @@ public class Ordine {
 	private int ID;
 	private String data;
 	private String stato;
-	private float prezzo;
+	private double prezzo;
 	
 	public Ordine (){
 		ID=0;
@@ -10,7 +10,7 @@ public class Ordine {
 		stato=null;
 		prezzo=0;
 	}
-	public Ordine (int ID, String data, String stato, float prezzo) {
+	public Ordine (int ID, String data, String stato, double prezzo) {
 		this.ID = ID;
 		this.data = data;
 		this.stato = stato;
@@ -25,7 +25,7 @@ public class Ordine {
 	public void setStato (String s){
 		stato = s;
 	}
-	public void setPrezzo (float pr){
+	public void setPrezzo (double pr){
 		prezzo = pr;
 	}
 
@@ -38,7 +38,7 @@ public class Ordine {
 	public String getStato () {
 		return stato;
 	}
-	public float getPrezzo () {
+	public double getPrezzo () {
 		return prezzo;
 	}
 }

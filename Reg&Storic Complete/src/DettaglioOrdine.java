@@ -21,7 +21,7 @@ public class DettaglioOrdine {
 		vet[i]=l;
 	}
 	public String vedi(){
-		String ap = " ";
+		String ap = new String();
 		for (int i=0; i<n; i++) {
 			try{
 				ap = ap + "ID: " + vet[i].getID() + ",Articolo: " + vet[i].getNome() + ",Peso: " + vet[i].getPeso() + "kg, Prezzo: " + vet[i].getPrezzo() + "€, Quantità:" + vet[i].getQuantita() + '\n';

@@ -1,17 +1,3 @@
-1
-computer pc
-6
-600
-1
-
-2
-tastiera usb
-0.6
-50
-1
-
-3
-videogioco pc
-0.1
-30
-5
+1;computer pc;6;600;1
+2;tastiera usb;0.6;50;1
+3;videogioco pc;0.1;30;5

@@ -7,7 +7,7 @@ public class Main {
 		Scanner x =new Scanner(System.in);
 		Scanner input = new Scanner(System.in);
 		do {
-			System.out.println("Premi 1 per registrarti. ");
+			System.out.println("Premi 1 per registrarti");
 			System.out.println("Premi 2 per loggarti ");
 			System.out.println("Premi 3 per uscire");
 			s=x.nextInt();
@@ -47,15 +47,8 @@ public class Main {
 			case 2:{
 				//LETTURA DAL FILE I DATI DELL'UTENTE REGISTRATO
 				File list2 = new File("Utenti.txt",'R');
-				String str = new String();
-				str = list2.fromFile();//legge
-				String[] a = str.split(";", 4);
-				String nome = a[0];
-				String cognome = a[1];
-				//Email & passowrd
-				String email = a[2];
-				String pass2 = a[3];
 				boolean found = false;
+				String str = new String();
 				String user;
 				String pass;
 				x.nextLine();
@@ -68,21 +61,35 @@ public class Main {
 				if(user.equals("0")) break;
 				System.out.println("Inserisci la password: ");
 				pass=x.nextLine();
-				if(user.equals(email) && pass.equals(pass2))
-				{
-					found = true;
-					if(found == true) {
-						System.out.println("Accesso effettuato");
-						ListaOrdini l = new ListaOrdini();
-						l.vediOrd();
-						System.out.println(l.vedi());
-						l.vedidett();
+				while(true) {
+					str = list2.fromFile();
+					String[] a = str.split(";", 4);
+					//Email & password
+					String email = a[2];
+					String pass2 = a[3];
+					if(user.equals(email) && pass.equals(pass2))
+					{
+						found = true;
+						if(found == true) {
+							System.out.println("Accesso effettuato");
+							ListaOrdini l = new ListaOrdini();
+							l.vediOrd();
+							System.out.println(l.vedi());
+							l.vedidett();
+							break;
+						}
+						else{
+							System.out.println("Accesso non effettuato");
+							break;
+						}
+					}
+					else{
+						System.out.println("Accesso non effettuato");
+						break;
 					}
 				}
-				if(found == false) System.out.println("Accesso non effettuato");
-				
-			}break;
 			}
-		}while(s!=3);	
-	}
+		}
+		}while(s!=3);
+}
 }

@@ -38,4 +38,7 @@ public class File {
 		else
 			reader.close();
 	}
+	public boolean exists() {
+		return false;
+	}
 }
