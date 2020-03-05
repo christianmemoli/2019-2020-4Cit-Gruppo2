@@ -10,49 +10,44 @@ public class ListaOrdini {
 	public void setV(Ordine[] v) {
 		vet = v;
 	}
-	public int getD() {
-		return n;
-	}
 	public Ordine[] getV() {
 		return vet;
 	}
-
 	public Ordine getOrdine(int i){
 		return vet[i];
 	}
 	public void setOrdine(Ordine l, int i){
 		vet[i]=l;
 	}
-	public String vedi(){
-		String ap=new String();
+	public String vedi() {
+		String ap = new String();
 		for (int i=0; i<n; i++) {
 			try{
-				ap = ap + "Ordine: " + vet[i].getID() + ", Data: " + vet[i].getData() + ", Stato: " + vet[i].getStato() + ", Prezzo: " + vet[i].getPrezzo() + '\n';
+				ap = ap+"Ordine: "+vet[i].getID()+", Data: "+vet[i].getData()+", Stato: "+vet[i].getStato()+", Prezzo: "+vet[i].getPrezzo()+'\n';
 			}
 			catch(java.lang.NullPointerException exception){
 			}
 		}
 		return ap;
 	}
-	public double calcPrezzoOrd() throws IOException {
+	public double calcPrezzoOrd(int x) throws IOException {
 		String str = new String();
 		double a = 0;
 		for(int i=0; i<n; i++) {
 			try {
 				File det = new File("dettordine"+i+".txt",'R');
-				if(det.exists()) {
-					while(true) {
-						str = det.fromFile();
-						String[] app = str.split(";",5);
+				while(true) {
+					str = det.fromFile();
+					String[] app = str.split(";",5);
+					if(i==x) {
 						a = a + Double.parseDouble(app[3]);
 					}
-				}
-				else {
-					return 0;
+					else {
+						;//fai nulla
+					}
 				}
 			}
-			catch(FileException exception) {
-				System.out.println(exception.getMess());
+			catch(FileException | java.io.FileNotFoundException exception) {
 			}
 		}
 		return a;
@@ -69,7 +64,7 @@ public class ListaOrdini {
 				ord.setID(Integer.parseInt(app[0]));
 				ord.setData(app[1]);
 				ord.setStato(app[2]);
-				ord.setPrezzo(calcPrezzoOrd());
+				ord.setPrezzo(calcPrezzoOrd(Integer.parseInt(app[0])));
 				setOrdine(ord, j);
 				j++;
 			}
@@ -78,15 +73,16 @@ public class ListaOrdini {
 			System.out.println(exception.getMess());
 		}
 		o.close();
+		System.out.println(vedi());
 	}
 	public void vedidett() throws IOException{
 		int s;
 		String str = new String();
 		DettaglioOrdine d = new DettaglioOrdine();
 		System.out.println("Visualizzare nel dettaglio quale ordine?");
+		System.out.println("Premi 0 per tornare alla lista");
 		s = input.nextInt();
-		for(int i=0;i<n;i++)
-		{
+		for(int i=0;i<n;i++){
 			try {
 				if(s == vet[i].getID()) {
 					int j=0;
@@ -102,14 +98,16 @@ public class ListaOrdini {
 							p.setPrezzo(Float.parseFloat(app[3]));
 							p.setQuantita(Integer.parseInt(app[4]));
 							d.setProdotto(p, j);
-							dett.fromFile();
 							j++;
 						}
 					}
-					catch(FileException exception) {
-						System.out.println(exception.getMess());
+					catch(FileException | java.io.FileNotFoundException exception) {
 					}
+					dett.close();
 					System.out.println(d.vedi());
+				}
+				else if(s == 0) {
+					break;
 				}
 			}
 			catch(java.lang.NullPointerException exception) {

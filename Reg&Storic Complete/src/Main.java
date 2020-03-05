@@ -62,34 +62,30 @@ public class Main {
 				System.out.println("Inserisci la password: ");
 				pass=x.nextLine();
 				while(true) {
+					while(found!=true) {
+						try {
 					str = list2.fromFile();
 					String[] a = str.split(";", 4);
-					//Email & password
 					String email = a[2];
 					String pass2 = a[3];
 					if(user.equals(email) && pass.equals(pass2))
 					{
 						found = true;
-						if(found == true) {
 							System.out.println("Accesso effettuato");
 							ListaOrdini l = new ListaOrdini();
 							l.vediOrd();
-							System.out.println(l.vedi());
 							l.vedidett();
 							break;
-						}
-						else{
-							System.out.println("Accesso non effettuato");
+					}
+					}
+						catch(FileException exception) {
+							System.out.println("Login fallito");
 							break;
 						}
-					}
-					else{
-						System.out.println("Accesso non effettuato");
-						break;
-					}
+					}break;
 				}
 			}
 		}
 		}while(s!=3);
-}
+	}
 }
