@@ -33,23 +33,18 @@ public class ListaOrdini {
 	public double calcPrezzoOrd(int x) throws IOException {
 		String str = new String();
 		double a = 0;
-		for(int i=0; i<n; i++) {
+		
 			try {
-				File det = new File("dettordine"+i+".txt",'R');
+				File det = new File("dettordine"+x+".txt",'R');
 				while(true) {
 					str = det.fromFile();
 					String[] app = str.split(";",5);
-					if(i==x) {
 						a = a + Double.parseDouble(app[3]);
-					}
-					else {
-						;//fai nulla
-					}
 				}
 			}
 			catch(FileException | java.io.FileNotFoundException exception) {
 			}
-		}
+		
 		return a;
 	}
 	public void vediOrd() throws IOException{
